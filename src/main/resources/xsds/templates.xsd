@@ -1,0 +1,110 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.concretepage.com/codemark-ws"
+           targetNamespace="http://www.concretepage.com/codemark-ws" elementFormDefault="qualified">
+
+    <xs:element name="getUserByLoginRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="userLogin" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getUserByLoginResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="userWithRoles" type="tns:fullUser"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="userRole">
+        <xs:sequence>
+            <xs:element name = "id" type = "xs:long"/>
+            <xs:element name = "name" type = "xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="getAllUsersRequest">
+        <xs:complexType/>
+    </xs:element>
+    <xs:complexType name="fullUser">
+        <xs:sequence>
+            <xs:element name = "login" type = "xs:string"/>
+            <xs:element name = "name" type = "xs:string"/>
+            <xs:element name = "password" type = "xs:string"/>
+            <xs:sequence>
+                <xs:element name = "role" type = "tns:userRole" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="simpleUser">
+        <xs:sequence>
+            <xs:element name = "login" type = "xs:string"/>
+            <xs:element name = "name" type = "xs:string"/>
+            <xs:element name = "password" type = "xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="getAllUsersResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="user" type="tns:simpleUser" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>   
+
+    <xs:element name="addUserRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="login" type="xs:string"/>
+                <xs:element name="name" type="xs:string"/>
+                <xs:element name="password" type="xs:string"/>
+                <xs:sequence>
+                    <xs:element name="role" type="xs:string" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updateUserRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="login" type="xs:string"/>
+                <xs:element name="name" type="xs:string"/>
+                <xs:element name="password" type="xs:string"/>
+                <xs:sequence>
+                    <xs:element name="role" type="xs:string" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="updateUserResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="success" type="xs:boolean"/>
+                <xs:sequence>
+                    <xs:element name="error" type="xs:string" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="addUserResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="success" type="xs:boolean"/>
+                <xs:sequence>
+                    <xs:element name="error" type="xs:string" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="deleteUserRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="login" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deleteUserResponse">
+        <xs:complexType>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
